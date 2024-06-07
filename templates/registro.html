@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Mascotas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #54ab6e;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #115a22;
+        }
+        .datosRegistrados {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .datosRegistrados h2 {
+            margin-top: 0;
+        }
+        .eliminar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .eliminar:hover {
+            background-color: #d43f3f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de Mascotas</h1>
+    <form id="registroForm">
+        <label for="nombre_dueño">Nombre del dueño:</label>
+        <input type="text" id="nombre_dueño" name="nombre_dueño" required><br>
+        
+        <label for="cedula_dueño">Cédula del dueño:</label>
+        <input type="text" id="cedula_dueño" name="cedula_dueño" required><br>
+        
+        <label for="nombre_mascota">Nombre de la mascota:</label>
+        <input type="text" id="nombre_mascota" name="nombre_mascota" required><br>
+        
+        <label for="edad_mascota">Edad de la mascota:</label>
+        <input type="number" id="edad_mascota" name="edad_mascota" required><br>
+        
+        <label for="raza_mascota">Raza de la mascota:</label>
+        <input type="text" id="raza_mascota" name="raza_mascota" required><br>
+        
+        <label for="tiempo_alojamiento">Tiempo de alojamiento (en días):</label>
+        <input type="number" id="tiempo_alojamiento" name="tiempo_alojamiento" required><br>
+        
+        <input type="submit" value="Registrar">
+    </form>
+
+    <div id="contenedorRegistros"></div>
+
+    <script>
+        document.getElementById("registroForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe normalmente
+
+            // Obtiene los valores de los campos del formulario
+            var nombreDueño = document.getElementById("nombre_dueño").value;
+            var cedulaDueño = document.getElementById("cedula_dueño").value;
+            var nombreMascota = document.getElementById("nombre_mascota").value;
+            var edadMascota = document.getElementById("edad_mascota").value;
+            var razaMascota = document.getElementById("raza_mascota").value;
+            var tiempoAlojamiento = document.getElementById("tiempo_alojamiento").value;
+
+            // Crea un nuevo div para los datos registrados
+            var nuevoRegistro = document.createElement("div");
+            nuevoRegistro.className = "datosRegistrados";
+            nuevoRegistro.innerHTML = `
+                <h2>Datos Registrados:</h2>
+                <p><strong>Nombre del dueño:</strong> ${nombreDueño}</p>
+                <p><strong>Cédula del dueño:</strong> ${cedulaDueño}</p>
+                <p><strong>Nombre de la mascota:</strong> ${nombreMascota}</p>
+                <p><strong>Edad de la mascota:</strong> ${edadMascota}</p>
+                <p><strong>Raza de la mascota:</strong> ${razaMascota}</p>
+                <p><strong>Tiempo de alojamiento:</strong> ${tiempoAlojamiento} días</p>
+                <button class="eliminar">Eliminar</button>
+            `;
+
+            // Agrega el nuevo div al contenedor de registros
+            document.getElementById("contenedorRegistros").appendChild(nuevoRegistro);
+
+            // Añade un event listener al botón de eliminar para borrar el registro correspondiente
+            nuevoRegistro.querySelector(".eliminar").addEventListener("click", function() {
+                nuevoRegistro.remove();
+            });
+
+            // Resetea el formulario
+            document.getElementById("registroForm").reset();
+        });
+    </script>
+</body>
+</html>
