@@ -1,12 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 import os
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    my_set = {"Hello World from Railway whit Flask!"}
-    return jsonify(list(my_set))
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
